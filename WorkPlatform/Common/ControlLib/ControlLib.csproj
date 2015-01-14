@@ -134,9 +134,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Themes\ButtonResource.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controls\PopupControl\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\btbg.png" />
+    <Resource Include="Images\btfg.png" />
+    <Resource Include="Images\toolbar_hover.png" />
+    <Resource Include="Images\toolbar_pushed.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

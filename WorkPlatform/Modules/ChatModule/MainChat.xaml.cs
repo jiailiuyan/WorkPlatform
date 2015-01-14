@@ -110,7 +110,7 @@ namespace Modules.ChatModule
 
         public bool IsTool
         {
-            get { return true; }
+            get { return false ; }
         }
 
         #endregion

@@ -7,9 +7,12 @@
              d:DesignWidth="300"
              mc:Ignorable="d">
     <Grid>
-        <Button Content="模块管理" Width="200" Height="100" PreviewMouseLeftButtonUp="Button_PreviewMouseLeftButtonUp">
+        <Button Width="200"
+                Height="100"
+                Content="模块管理"
+                PreviewMouseLeftButtonUp="Button_PreviewMouseLeftButtonUp">
             <Button.Background>
-                <ImageBrush ImageSource="Images/icon1.png" />
+                <ImageBrush ImageSource="pack://application:,,,/ModuleManagementPlugin;component/Images/icon1.png" />
             </Button.Background>
         </Button>
     </Grid>

@@ -11,7 +11,7 @@
     <Grid>
         <Grid Width="300" Height="300">
             <Grid.Background>
-                <ImageBrush ImageSource="Images/memo_background.png" />
+                <ImageBrush ImageSource="pack://application:,,,/NoteBookPlugin;component/Images/memo_background.png" />
             </Grid.Background>
             <Grid.RowDefinitions>
                 <RowDefinition Height="40" />

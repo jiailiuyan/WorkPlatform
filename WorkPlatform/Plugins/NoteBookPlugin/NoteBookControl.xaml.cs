@@ -50,7 +50,7 @@ namespace NoteBookPlugin
         {
             get
             {
-                return new BitmapImage(new Uri("/NoteBookPlugin;component/Images/5.png", UriKind.Relative));
+                return new BitmapImage(new Uri("pack://application:,,,/NoteBookPlugin;component/Images/5.png", UriKind.RelativeOrAbsolute));
             }
         }
 

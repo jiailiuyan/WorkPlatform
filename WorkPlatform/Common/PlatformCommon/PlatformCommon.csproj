@@ -49,16 +49,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="log4net">
-      <HintPath>..\..\..\PrismLib\log4net.dll</HintPath>
+      <HintPath>..\..\..\PlatformLib\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.Prism">
-      <HintPath>..\..\..\PrismLib\Microsoft.Practices.Prism.dll</HintPath>
+      <HintPath>..\..\..\PlatformLib\Microsoft.Practices.Prism.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.Prism.Interactivity">
-      <HintPath>..\..\..\PrismLib\Microsoft.Practices.Prism.Interactivity.dll</HintPath>
+      <HintPath>..\..\..\PlatformLib\Microsoft.Practices.Prism.Interactivity.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation">
-      <HintPath>..\..\..\PrismLib\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <HintPath>..\..\..\PlatformLib\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />

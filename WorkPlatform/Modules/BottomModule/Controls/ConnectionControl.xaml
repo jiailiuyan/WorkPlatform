@@ -4,13 +4,56 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+
+                        <Grid  >
+
+                            <Grid x:Name="grid">
+
+                                <Rectangle Height="25"
+                                           Fill="{TemplateBinding Background}"
+                                           Stroke="Black"
+                                           StrokeThickness="0" />
+                            </Grid>
+
+                            <Border x:Name="fg"
+                                    BorderBrush="Black"
+                                    BorderThickness="0"
+                                    CornerRadius="3"
+                                    Visibility="Hidden">
+                                <Border.Background>
+                                    <ImageBrush ImageSource="/Modules.BottomModule;component/Images/toolbar_hover.png" Stretch="Fill" />
+                                </Border.Background>
+                            </Border>
+                          
+                        </Grid>
+                        <ControlTemplate.Triggers>
+
+                            <Trigger Property="IsDefaulted" Value="True" />
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsMouseOver" Value="True" />
+                                </MultiTrigger.Conditions>
+                                <Setter TargetName="fg" Property="Visibility" Value="Visible" />
+                            </MultiTrigger>
+                            <Trigger Property="IsPressed" Value="True" />
+                            <Trigger Property="IsEnabled" Value="False" />
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <Button Width="30"
                 Height="30"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Click="action_Click"
-                Style="{x:Null}">
+                Click="action_Click">
             <Button.Background>
                 <ImageBrush ImageSource="/Modules.BottomModule;component/Images/header.ico" />
             </Button.Background>

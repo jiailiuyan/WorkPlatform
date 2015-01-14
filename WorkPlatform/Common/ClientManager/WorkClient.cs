@@ -56,8 +56,12 @@ namespace ClientManager
 
         public bool RegisterServerNode(string ip = "127.0.0.1", int port = 12000)
         {
-            this.UnRegisterServerNode(this.Guid);
-            return this.RegisterServerNode(this.Guid, new System.Net.IPEndPoint(System.Net.IPAddress.Parse(ip), port));
+            if (!string.IsNullOrWhiteSpace(ip))
+            {
+                this.UnRegisterServerNode(this.Guid);
+                return this.RegisterServerNode(this.Guid, new System.Net.IPEndPoint(System.Net.IPAddress.Parse(ip), port));
+            }
+            return false;
         }
 
         protected void ReceivedMessageHandle(EventHandler<MessageDataArgs> e, MessageData msd)

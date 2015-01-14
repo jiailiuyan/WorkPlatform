@@ -35,7 +35,7 @@ namespace Modules.BottomModule
 
         void BottomToolBarUC_Loaded(object sender, RoutedEventArgs e)
         {
-          
+
         }
 
         [Import]
@@ -51,7 +51,7 @@ namespace Modules.BottomModule
             }
         }
 
-        private void pluginAction_Click(object sender, RoutedEventArgs e)
+        private void pluginview_Click(object sender, MouseButtonEventArgs e)
         {
             var control = sender as FrameworkElement;
             if (control != null)

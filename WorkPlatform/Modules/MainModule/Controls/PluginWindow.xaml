@@ -7,66 +7,92 @@
              d:DesignHeight="140"
              d:DesignWidth="300"
              mc:Ignorable="d">
-    <UserControl.Resources />
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Modules.MainModule;component/Themes/SysButtonStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="40" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
+        <StackPanel Orientation="Vertical">
 
-        <controls:IncludeGrid x:Name="titlgrid"
-                              Grid.Row="0"
-                              Visibility="Collapsed">
-            <Grid.Background>
-                <ImageBrush ImageSource="/Modules.MainModule;component/Images/tbgk.png" />
-            </Grid.Background>
-            <Label Grid.Row="1"
-                   Height="36"
-                   HorizontalAlignment="Left"
-                   VerticalContentAlignment="Center"
-                   Content="{Binding Title}" />
+            <controls:IncludeGrid x:Name="titlgrid"
+                                  Height="40"
+                                  Visibility="Collapsed">
+                <Grid.Background>
+                    <ImageBrush ImageSource="/Modules.MainModule;component/Images/tbgk.png" />
+                </Grid.Background>
+                <Label Grid.Row="1"
+                       Height="36"
+                       HorizontalAlignment="Left"
+                       VerticalContentAlignment="Center"
+                       Content="{Binding Title}" />
 
-            <StackPanel Grid.RowSpan="2"
-                        HorizontalAlignment="Right"
-                        FlowDirection="RightToLeft"
-                        Orientation="Horizontal">
-                <controls:ExceptGrid Width="26"
-                                     Height="26"
-                                     Margin="15,0,5,0"
-                                     HorizontalAlignment="Right">
-                    <Button PreviewMouseLeftButtonDown="close_Click">
-                        <Image Source="/Modules.MainModule;component/Images/close.png" />
-                    </Button>
-                </controls:ExceptGrid>
-                <controls:ExceptGrid Width="26"
-                                     Height="26"
-                                     Margin="5,0,5,0"
-                                     HorizontalAlignment="Right">
-                    <Button HorizontalAlignment="Right" PreviewMouseLeftButtonDown="max_Click">
-                        <Image Source="/Modules.MainModule;component/Images/max.png" />
-                    </Button>
-                </controls:ExceptGrid>
-                <controls:ExceptGrid Width="26"
-                                     Height="26"
-                                     Margin="5,0,5,0"
-                                     HorizontalAlignment="Right">
+                <StackPanel Grid.RowSpan="2"
+                            HorizontalAlignment="Right"
+                            FlowDirection="RightToLeft"
+                            Orientation="Horizontal">
+                    <controls:ExceptGrid Width="26"
+                                         Height="26"
+                                         Margin="15,0,5,0"
+                                         HorizontalAlignment="Right">
+                        <Button Width="26"
+                                Height="26"
+                                PreviewMouseLeftButtonDown="close_Click"
+                                Style="{DynamicResource CloseButtonStyle}">
+                            <Button.Background>
+                                <ImageBrush ImageSource="/Modules.MainModule;component/Images/close.png" Stretch="Uniform" />
+                            </Button.Background>
+                        </Button>
+                    </controls:ExceptGrid>
+                    <controls:ExceptGrid Width="26"
+                                         Height="26"
+                                         Margin="5,0,5,0"
+                                         HorizontalAlignment="Right">
+                        <Button Width="26"
+                                Height="26"
+                                HorizontalAlignment="Right"
+                                PreviewMouseLeftButtonDown="max_Click"
+                                Style="{DynamicResource MaxButtonStyle}">
+                            <Button.Background>
+                                <ImageBrush ImageSource="/Modules.MainModule;component/Images/max.png" Stretch="Uniform" />
+                            </Button.Background>
+                        </Button>
+                    </controls:ExceptGrid>
+                    <controls:ExceptGrid Width="26"
+                                         Height="26"
+                                         Margin="5,0,5,0"
+                                         HorizontalAlignment="Right">
 
-                    <Button HorizontalAlignment="Right" Click="min_Click">
-                        <Image Source="/Modules.MainModule;component/Images/min.png" />
-                    </Button>
-                </controls:ExceptGrid>
-                <controls:ExceptGrid Width="26"
-                                     Height="26"
-                                     Margin="5,0,5,0"
-                                     HorizontalAlignment="Right">
-                    <Button HorizontalAlignment="Right" Click="ask_Click">
-                        <Image Source="/Modules.MainModule;component/Images/ask.png" />
-                    </Button>
-                </controls:ExceptGrid>
-            </StackPanel>
-        </controls:IncludeGrid>
+                        <Button Width="26"
+                                Height="26"
+                                HorizontalAlignment="Right"
+                                Click="min_Click"
+                                Style="{DynamicResource MinButtonStyle}">
+                            <Button.Background>
+                                <ImageBrush ImageSource="/Modules.MainModule;component/Images/min.png" Stretch="Uniform" />
+                            </Button.Background>
+                        </Button>
+                    </controls:ExceptGrid>
+                    <controls:ExceptGrid Width="26"
+                                         Height="26"
+                                         Margin="5,0,5,0"
+                                         HorizontalAlignment="Right">
+                        <Button Width="26"
+                                Height="26"
+                                HorizontalAlignment="Right"
+                                Click="ask_Click"
+                                Style="{DynamicResource MinButtonStyle}">
+                            <Button.Background>
+                                <ImageBrush ImageSource="/Modules.MainModule;component/Images/ask.png" Stretch="Uniform" />
+                            </Button.Background>
+                        </Button>
+                    </controls:ExceptGrid>
+                </StackPanel>
+            </controls:IncludeGrid>
 
-        <ContentPresenter x:Name="contentpresenter" Grid.Row="1" />
-
+            <ContentPresenter x:Name="contentpresenter" Grid.Row="1" />
+        </StackPanel>
     </Grid>
 </UserControl>

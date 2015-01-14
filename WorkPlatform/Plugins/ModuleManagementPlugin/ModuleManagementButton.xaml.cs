@@ -40,7 +40,7 @@ namespace ModuleManagementPlugin
         {
             get
             {
-                return new BitmapImage(new Uri("/ModuleManagement;component/Images/icon1.png", UriKind.Relative));
+                return new BitmapImage(new Uri("pack://application:,,,/ModuleManagementPlugin;component/Images/icon1.png", UriKind.RelativeOrAbsolute));
             }
         }
 

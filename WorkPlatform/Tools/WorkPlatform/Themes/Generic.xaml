@@ -4,6 +4,6 @@
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     mc:Ignorable="d">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="ExpressionDark.xaml" />
+        <ResourceDictionary Source="Theme.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

@@ -21,10 +21,13 @@ namespace ControlLib
     /// </summary>
     public partial class CanvasButton : UserControl, IActionControl
     {
+        //<Rectangle.Fill>
+        //        <ImageBrush ImageSource="/ControlLib;component/Images/toolbar_pushed.png" />
+        //    </Rectangle.Fill>
+        public static readonly Brush SelectBrush = new ImageBrush() { ImageSource = new BitmapImage(new Uri("pack://application:,,,/ControlLib;component/Images/toolbar_pushed.png", UriKind.RelativeOrAbsolute)) };
+        // new SolidColorBrush((Color)ColorConverter.ConvertFromString("#5c4c4c4c"));
 
-        public static readonly Brush UnSelectBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#5c4c4c4c"));
-
-        public static readonly Brush SelectBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#0000"));
+        public static readonly Brush UnSelectBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#0000"));
 
         public IPluginObject PluginObject { get; private set; }
 
@@ -56,13 +59,13 @@ namespace ControlLib
             IsSelected = true;
             this.Loaded += CanvasButton_Loaded;
             PluginObject = po;
-            this.pluginimage.Source = po.PluginIcon;
-            this.pluginname.Text = po.PluginName;
+            this.showbutton.Background = new ImageBrush(po.PluginIcon) { Stretch = Stretch.Uniform };
+            this.showbutton.Content = po.PluginName;
         }
 
         void CanvasButton_Loaded(object sender, RoutedEventArgs e)
         {
-            defaultView = this.btn.GetImageSource();
+            defaultView = this.showbutton.GetImageSource();
             IsSelected = false;
         }
 
