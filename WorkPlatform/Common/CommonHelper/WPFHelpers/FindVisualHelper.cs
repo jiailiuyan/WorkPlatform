@@ -62,7 +62,6 @@ namespace Jisons
 
             while (scan != null && (((ancestorT) == null) && ((ancestorR) == null)))
             {
-                scan = VisualTreeHelper.GetParent(scan);
                 if (scan != null)
                 {
                     var ir = scan.GetType().GetInterface(typeof(T).Name, true);
@@ -76,6 +75,7 @@ namespace Jisons
                         return false;
                     }
                 }
+                scan = VisualTreeHelper.GetParent(scan);
             }
             return null;
         }

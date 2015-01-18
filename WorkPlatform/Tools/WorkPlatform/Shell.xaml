@@ -29,7 +29,7 @@
         </Grid>
 
 
-        <logincontrol:LoginControl Visibility="Collapsed" />
+        <logincontrol:LoginControl />
 
     </Grid>
 </Window>

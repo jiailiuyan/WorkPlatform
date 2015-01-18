@@ -44,7 +44,7 @@
                 Content=""
                 Style="{x:Null}">
             <Button.Background>
-                <ImageBrush ImageSource="/ChatTools;component/Images/file.png" />
+                <ImageBrush ImageSource="/Modules.ChatModule;component/Images/file.png" />
             </Button.Background>
         </Button>
         <Button Width="28"
@@ -55,7 +55,7 @@
                 Content=""
                 Style="{x:Null}">
             <Button.Background>
-                <ImageBrush ImageSource="/ChatTools;component/Images/folder.png" />
+                <ImageBrush ImageSource="/Modules.ChatModule;component/Images/folder.png" />
             </Button.Background>
         </Button>
 

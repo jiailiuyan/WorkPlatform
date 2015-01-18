@@ -50,10 +50,10 @@ namespace Modules.ChatModule
         {
             get
             {
-                if (pluginobject == null)
-                {
-                    pluginobject = new MainChat();
-                }
+                //if (pluginobject == null)
+                //{
+                //    pluginobject = new MainChat();
+                //}
                 return pluginobject;
             }
         }
@@ -110,7 +110,7 @@ namespace Modules.ChatModule
 
         public bool IsTool
         {
-            get { return false ; }
+            get { return false; }
         }
 
         #endregion
@@ -123,6 +123,8 @@ namespace Modules.ChatModule
             this.Loaded += MainControl_Loaded;
 
             WorkClient.Instance.OnMessageReceive += client_OnMessageReceive;
+
+            this.pluginobject = this;
         }
 
         void client_OnMessageReceive(object sender, MessageDataArgs e)
@@ -240,8 +242,13 @@ namespace Modules.ChatModule
                     chatControlList.Add(chatcontrol);
                     GlobalEvent.Instance.EventAggregator.GetEvent<PluginsEvent>().Publish(new PluginsEventArgs() { Action = PluginAction.Add, PluginObject = chatcontrol });
                 }
-                GlobalEvent.Instance.EventAggregator.GetEvent<PluginsEvent>().Publish(new PluginsEventArgs() { Action = PluginAction.Show, PluginObject = chatcontrol });
+
+                if (!chatcontrol.IsShow)
+                {
+                    GlobalEvent.Instance.EventAggregator.GetEvent<PluginsEvent>().Publish(new PluginsEventArgs() { Action = PluginAction.Show, PluginObject = chatcontrol });
+                }
             }
+
             return chatcontrol;
         }
 

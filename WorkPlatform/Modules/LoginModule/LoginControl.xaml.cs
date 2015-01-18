@@ -52,6 +52,9 @@ namespace Modules.LoginModule
 
             this.name.Text = "lisi";
             this.password.Text = "123456";
+
+            JudgeName();
+            JudgePassword();
         }
 
         void Instance_OnMessageReceive(object sender, PlatformCommon.Message.MessageDataArgs e)
@@ -91,7 +94,7 @@ namespace Modules.LoginModule
         void txt1_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.txt2.Visibility = Visibility.Hidden;
-            this.JudegePassword();
+            this.JudgePassword();
         }
 
         public void JudgeName()
@@ -106,7 +109,7 @@ namespace Modules.LoginModule
             }
         }
 
-        public void JudegePassword()
+        public void JudgePassword()
         {
             if (string.IsNullOrWhiteSpace(this.password.Text))
             {

@@ -33,10 +33,7 @@
                             HorizontalAlignment="Right"
                             FlowDirection="RightToLeft"
                             Orientation="Horizontal">
-                    <controls:ExceptGrid Width="26"
-                                         Height="26"
-                                         Margin="15,0,5,0"
-                                         HorizontalAlignment="Right">
+                    <controls:ExceptGrid Margin="15,-1,5,0" HorizontalAlignment="Right">
                         <Button Width="26"
                                 Height="26"
                                 PreviewMouseLeftButtonDown="close_Click"
@@ -46,10 +43,7 @@
                             </Button.Background>
                         </Button>
                     </controls:ExceptGrid>
-                    <controls:ExceptGrid Width="26"
-                                         Height="26"
-                                         Margin="5,0,5,0"
-                                         HorizontalAlignment="Right">
+                    <controls:ExceptGrid Margin="5,0,5,0" HorizontalAlignment="Right">
                         <Button Width="26"
                                 Height="26"
                                 HorizontalAlignment="Right"
@@ -65,8 +59,8 @@
                                          Margin="5,0,5,0"
                                          HorizontalAlignment="Right">
 
-                        <Button Width="26"
-                                Height="26"
+                        <Button Width="22"
+                                Height="22"
                                 HorizontalAlignment="Right"
                                 Click="min_Click"
                                 Style="{DynamicResource MinButtonStyle}">
@@ -75,10 +69,7 @@
                             </Button.Background>
                         </Button>
                     </controls:ExceptGrid>
-                    <controls:ExceptGrid Width="26"
-                                         Height="26"
-                                         Margin="5,0,5,0"
-                                         HorizontalAlignment="Right">
+                    <controls:ExceptGrid Margin="5,0,5,0" HorizontalAlignment="Right">
                         <Button Width="26"
                                 Height="26"
                                 HorizontalAlignment="Right"
