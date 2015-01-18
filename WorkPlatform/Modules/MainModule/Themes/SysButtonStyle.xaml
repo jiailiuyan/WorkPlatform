@@ -12,12 +12,14 @@
                                 BorderBrush="#80000000"
                                 BorderThickness="0,0,0,0"
                                 CornerRadius="0,0,3,0">
-                            <!--<Border.Background>
+                            <!--
+                                <Border.Background>
                                 <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-                                    <GradientStop Offset="0" Color="#B2FFFFFF" />
-                                    <GradientStop Offset="0.043" />
+                                <GradientStop Offset="0" Color="#B2FFFFFF" />
+                                <GradientStop Offset="0.043" />
                                 </LinearGradientBrush>
-                            </Border.Background>-->
+                                </Border.Background>
+                            -->
                             <Rectangle Margin="0"
                                        Stroke="Black"
                                        StrokeThickness="0">
@@ -71,12 +73,14 @@
                                 BorderBrush="#80000000"
                                 BorderThickness="0,0,0,0"
                                 CornerRadius="0">
-                            <!--<Border.Background>
+                            <!--
+                                <Border.Background>
                                 <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-                                    <GradientStop Offset="0" Color="#B2FFFFFF" />
-                                    <GradientStop Offset="0.043" />
+                                <GradientStop Offset="0" Color="#B2FFFFFF" />
+                                <GradientStop Offset="0.043" />
                                 </LinearGradientBrush>
-                            </Border.Background>-->
+                                </Border.Background>
+                            -->
                             <Rectangle x:Name="rectangle"
                                        Margin="2"
                                        Fill="{TemplateBinding Background}"
@@ -127,12 +131,14 @@
                                 BorderBrush="#80000000"
                                 BorderThickness="0,0,0,0"
                                 CornerRadius="0,0,0,3">
-                            <!--<Border.Background>
+                            <!--
+                                <Border.Background>
                                 <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-                                    <GradientStop Offset="0" Color="#B2FFFFFF" />
-                                    <GradientStop Offset="0.043" />
+                                <GradientStop Offset="0" Color="#B2FFFFFF" />
+                                <GradientStop Offset="0.043" />
                                 </LinearGradientBrush>
-                            </Border.Background>-->
+                                </Border.Background>
+                            -->
                             <Rectangle x:Name="rectangle"
                                        Margin="0"
                                        Fill="{TemplateBinding Background}"

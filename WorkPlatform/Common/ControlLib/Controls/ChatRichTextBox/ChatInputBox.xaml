@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="ControlLib.ChatInputBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:ControlLib"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             d:DesignHeight="300"
+             d:DesignWidth="300"
+             mc:Ignorable="d">
+    <Grid>
+        <RichTextBox x:Name="inputbox"
+                     Height="{Binding ActualHeight,
+                                      RelativeSource={RelativeSource AncestorType=UserControl}}"
+                     HorizontalAlignment="Left"
+                     VerticalAlignment="Top">
+            <local:ChatFlowDocument>
+                <Paragraph />
+            </local:ChatFlowDocument>
+        </RichTextBox>
+    </Grid>
+</UserControl>

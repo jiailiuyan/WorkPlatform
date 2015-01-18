@@ -100,6 +100,7 @@
     <Compile Include="WPFHelpers\ImageSourceHelper.cs" />
     <Compile Include="WPFHelpers\INotifyOfInvocationListHelper.cs" />
     <Compile Include="WPFHelpers\InputHelper.cs" />
+    <Compile Include="WPFHelpers\RichTextBoxHelper.cs" />
     <Compile Include="WPFHelpers\SelectorHelper.cs" />
     <Compile Include="WPFHelpers\UIElementHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -55,6 +55,13 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Practices.Prism, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\PlatformLib\Microsoft.Practices.Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Prism.Interactivity">
+      <HintPath>..\..\..\PlatformLib\Microsoft.Practices.Prism.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -70,6 +77,13 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\ChatRichTextBox\ChatFlowDocument.cs" />
+    <Compile Include="Controls\ChatRichTextBox\ChatInputBox.xaml.cs">
+      <DependentUpon>ChatInputBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ChatRichTextBox\ChatViewBox.xaml.cs">
+      <DependentUpon>ChatViewBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\DragControl\IncludeGrid.cs" />
     <Compile Include="Controls\DragControl\ExceptGrid.cs" />
     <Compile Include="Controls\DragControl\ISPDragIncludeControl.cs" />
@@ -85,9 +99,9 @@
     <Compile Include="Controls\MultipleDragCanvas\MultipleDragCanvas.xaml.cs">
       <DependentUpon>MultipleDragCanvas.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\MultipleDragCanvas\MultipleDragCanvasData.cs" />
     <Compile Include="Controls\DragControl\SPDragCanvas.cs" />
     <Compile Include="Controls\DragControl\ISPDragExceptControl.cs" />
+    <Compile Include="Controls\MultipleDragCanvas\MultipleDragCanvasData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -122,6 +136,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Controls\ChatRichTextBox\ChatInputBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ChatRichTextBox\ChatViewBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\MultipleDragCanvas\CanvasButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

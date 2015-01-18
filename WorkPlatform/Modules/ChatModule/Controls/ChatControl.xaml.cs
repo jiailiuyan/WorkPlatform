@@ -17,6 +17,12 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PlatformCommon.Message;
 using PlatformCommon.Plugin;
+using Jisons;
+using ControlLib;
+using PlatformCommon.Manager;
+using PlatformCommon.Events;
+using System.IO;
+using System.Xml;
 
 namespace Modules.ChatModule
 {
@@ -124,107 +130,178 @@ namespace Modules.ChatModule
         void ChatControl_Loaded(object sender, RoutedEventArgs e)
         {
             WorkClient.Instance.OnFileAction += client_OnFileAction;
+
+            foreach (var plugin in PluginManager.Instance.PluginObjects)
+            {
+                MenuItem item = new MenuItem();
+                item.Header = plugin.PluginName;
+
+                item.Click += (itemsender, iteme) =>
+                {
+                    CanvasButton cb = new CanvasButton();
+                    cb.InitCanvasButton(plugin);
+                    cb.Width = 50;
+                    cb.Height = 50;
+                    //cb.AddEvent += (cbs, cbe) =>
+                    //{
+                    //    GlobalEvent.Instance.EventAggregator.GetEvent<PluginsEvent>().Publish(new PluginsEventArgs() { Action = PluginAction.Show, PluginObject = plugin });
+                    //    plugin.IsShow = true;
+                    //};
+                    this.inputrichbox.AddControl(cb);
+                };
+                this.pluginmenu.Items.Add(item);
+            }
         }
 
         void client_OnFileAction(object sender, FileActionArgs e)
         {
-            this.Dispatcher.BeginInvoke((Action)(() =>
-              {
-                  switch (e.Type)
-                  {
-                      case ControlType.SendStart:
-                          {
-                              this.filescontrol.Children.Add(e.Control);
-                              break;
-                          }
 
-                      case ControlType.SendCancel:
-                      case ControlType.SendRefuse:
-                          {
+            switch (e.Type)
+            {
+                case ControlType.SendStart:
+                    {
+                        if (!this.filescontrol.Children.Contains(e.Control))
+                        {
+                            this.filescontrol.Children.Add(e.Control);
+                        }
+                        break;
+                    }
 
-                              this.filescontrol.Children.Remove(e.Control);
-                              break;
-                          }
-                      case ControlType.SendComplete:
-                          {
-                              var path = "";
-                              var control = e.Control as SendFileControl;
+                case ControlType.SendCancel:
+                case ControlType.SendRefuse:
+                    {
 
-                              if (control != null)
-                              {
-                                  path = control.FileName + " 发送已经完成"; ;
-                              }
+                        this.filescontrol.Children.Remove(e.Control);
+                        break;
+                    }
+                case ControlType.SendComplete:
+                    {
+                        var path = "";
+                        var control = e.Control as SendFileControl;
 
-                              this.receivemsg.Text += Environment.NewLine;
-                              this.receivemsg.Text += path;
+                        if (control != null)
+                        {
+                            path = control.FileName + " 发送已经完成"; ;
+                        }
 
+                        //this.receivemsg.Text += Environment.NewLine;
+                        //this.receivemsg.Text += path;
+                        var title = path + "  " + DateTime.Now.ToString("HH:mm:ss") + Environment.NewLine;
+                        var p = new Paragraph();
+                        var r = new Run(title);
+                        p.Inlines.Add(r);
+                        p.Foreground = Brushes.Red;
+                        this.viewrichbox.Document.Blocks.Add(p);
+                        this.viewrichbox.ScrollToEnd();
 
-                              this.filescontrol.Children.Remove(e.Control);
-                              break;
-                          }
-
-
-
-                      case ControlType.ReceiveStart:
-                          {
-                              this.filescontrol.Children.Add(e.Control);
-                              break;
-                          }
-
-                      case ControlType.ReceiveCancel:
-                      case ControlType.ReceiveRefuse:
-                          {
-                              this.filescontrol.Children.Remove(e.Control);
-                              break;
-                          }
-                      case ControlType.ReceiveComplete:
-                          {
-                              var path = "";
-                              var control = e.Control as ReceiveFloderControl;
-                              if (control != null)
-                              {
-
-                                  path = control.FloderPath + " 接收已经完成"; ;
-
-                              }
-                              else
-                              {
-                                  var filecontrol = e.Control as ReceiveFileControl;
-                                  path = filecontrol.FileName + " 接收已经完成"; ;
-                              }
-
-                              this.receivemsg.Text += Environment.NewLine;
-                              this.receivemsg.Text += path;
-
-                              this.filescontrol.Children.Remove(e.Control);
-                              break;
-                          }
+                        this.filescontrol.Children.Remove(e.Control);
+                        break;
+                    }
 
 
-                      default: break;
-                  }
-              }));
+
+                case ControlType.ReceiveStart:
+                    {
+                        if (!this.filescontrol.Children.Contains(e.Control))
+                        {
+                            this.filescontrol.Children.Add(e.Control);
+                        }
+                        break;
+                    }
+
+                case ControlType.ReceiveCancel:
+                case ControlType.ReceiveRefuse:
+                    {
+                        this.filescontrol.Children.Remove(e.Control);
+                        break;
+                    }
+                case ControlType.ReceiveComplete:
+                    {
+                        var path = "";
+                        var control = e.Control as ReceiveFloderControl;
+                        if (control != null)
+                        {
+
+                            path = control.FloderPath + " 接收已经完成"; ;
+
+                        }
+                        else
+                        {
+                            var filecontrol = e.Control as ReceiveFileControl;
+                            path = filecontrol.FileName + " 接收已经完成"; ;
+                        }
+
+
+                        var title = path + "  " + DateTime.Now.ToString("HH:mm:ss") + Environment.NewLine;
+                        var p = new Paragraph();
+                        var r = new Run(title);
+                        p.Inlines.Add(r);
+                        p.Foreground = Brushes.Red;
+                        this.viewrichbox.Document.Blocks.Add(p);
+                        this.viewrichbox.ScrollToEnd();
+                        //this.receivemsg.Text += Environment.NewLine;
+                        //this.receivemsg.Text += path;
+
+                        this.filescontrol.Children.Remove(e.Control);
+                        break;
+                    }
+
+
+                default: break;
+            }
+
         }
 
         private void send_Click(object sender, RoutedEventArgs e)
         {
-            var message = this.msg.Text;
             var data = new MessageData();
             data.Type = MessageType.Message;
-            data.Value = message;
 
             data.SentUser = WorkClient.Instance.Person.ClientInfo;
             data.ResiveUser = Person;
 
-            this.receivemsg.Text += Environment.NewLine;
-            this.receivemsg.Text += WorkClient.Instance.Person.ClientInfo.Name + "  " + DateTime.Now.ToString("HH:mm:ss");
-            this.receivemsg.Text += Environment.NewLine;
-            this.receivemsg.Text += message;
-            this.receivemsg.ScrollToEnd();
+            var xaml = this.inputrichbox.GetString();
+            if (string.IsNullOrWhiteSpace(xaml))
+            {
+                return;
+            }
+
+            data.Value = xaml;
+
+            var a = System.Windows.Markup.XamlReader.Parse(xaml);
+            var rich = a as RichTextBox;
+            var bs = rich.Document.Blocks.FirstBlock as Paragraph;
+            foreach (var item in bs.Inlines)
+            {
+                var rrr = item as InlineUIContainer;
+                if (rrr != null)
+                {
+                    var rt = rrr.Child as CanvasButton;
+                    if (rt.Tag != null && !string.IsNullOrWhiteSpace(rt.Tag.ToString()))
+                    {
+                        var plugin = PluginManager.Instance.PluginObjects.FirstOrDefault(i => i.PluginName == rt.Tag.ToString());
+                        if (plugin != null)
+                        {
+                            rt.InitCanvasButton(plugin);
+                            rt.IsSelected = false;
+                        }
+                    }
+                }
+            }
+
+            var title = WorkClient.Instance.Person.ClientInfo.Name + "  " + DateTime.Now.ToString("HH:mm:ss") + Environment.NewLine;
+            var p = new Paragraph();
+            var r = new Run(title);
+            p.Inlines.Add(r);
+            p.Foreground = Brushes.Blue;//设置字体颜色  
+            this.viewrichbox.Document.Blocks.Add(p);
+
+            this.viewrichbox.Document.Blocks.Add(bs);
+            this.viewrichbox.ScrollToEnd();
 
             WorkClient.Instance.SendMessage(data);
 
-            this.msg.Text = "";
+            this.inputrichbox.Document.Blocks.Clear();
         }
 
         private void close_Click(object sender, RoutedEventArgs e)
@@ -268,12 +345,58 @@ namespace Modules.ChatModule
         {
             if (message.ResiveUser.KeyId == WorkClient.Instance.Person.ClientInfo.KeyId)
             {
-                this.receivemsg.Text += Environment.NewLine;
-                this.receivemsg.Text += message.SentUser.Name + "  " + DateTime.Now.ToString("HH:mm:ss");
-                this.receivemsg.Text += Environment.NewLine;
-                this.receivemsg.Text += message.Value.ToString();
-                this.receivemsg.ScrollToEnd();
+
+                var a = System.Windows.Markup.XamlReader.Parse(message.Value.ToString());
+
+                var rich = a as RichTextBox;
+
+                var bs = rich.Document.Blocks.FirstBlock as Paragraph;
+
+                foreach (var item in bs.Inlines)
+                {
+                    var rrr = item as InlineUIContainer;
+                    if (rrr != null)
+                    {
+                        var rt = rrr.Child as CanvasButton;
+                        if (rt.Tag != null && !string.IsNullOrWhiteSpace(rt.Tag.ToString()))
+                        {
+                            var plugin = PluginManager.Instance.PluginObjects.FirstOrDefault(i => i.PluginName == rt.Tag.ToString());
+                            if (plugin != null)
+                            {
+                                rt.InitCanvasButton(plugin);
+                                rt.IsSelected = false;
+                            }
+                        }
+                    }
+
+                }
+
+                var title = message.SentUser.Name + "  " + DateTime.Now.ToString("HH:mm:ss") + Environment.NewLine;
+                var p = new Paragraph();
+                var r = new Run(title);
+                p.Inlines.Add(r);
+                p.Foreground = Brushes.Blue;//设置字体颜色  
+                this.viewrichbox.Document.Blocks.Add(p);
+
+                this.viewrichbox.Document.Blocks.Add(bs);
+                this.viewrichbox.ScrollToEnd();
+
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.inputrichbox.SetFontWeight();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            this.inputrichbox.SetFontTilt();
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            this.inputrichbox.SetFontUnderLine();
         }
 
     }

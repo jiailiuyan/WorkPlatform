@@ -6,12 +6,6 @@ using PlatformCommon.Plugin;
 
 namespace ControlLib
 {
-
-    public enum PluginAction
-    {
-
-    }
-
     public class AddControlArgs : EventArgs
     {
         public IPluginObject PluginObject { get; set; }

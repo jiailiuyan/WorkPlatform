@@ -63,7 +63,7 @@ namespace Modules.LoginModule
             {
                 case PlatformCommon.Message.MessageType.Login:
                     {
-                        if (WorkClient.Instance.Person.KeyId != 0)
+                        if (WorkClient.Instance.Person != null && WorkClient.Instance.Person.KeyId != 0)
                         {
                             this.msgText.Text = "登录成功";
                             this.Visibility = System.Windows.Visibility.Collapsed;

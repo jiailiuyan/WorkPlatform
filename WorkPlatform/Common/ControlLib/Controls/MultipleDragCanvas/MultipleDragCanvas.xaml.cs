@@ -147,8 +147,10 @@ namespace ControlLib
 
         public void AddDragControl(IPluginObject iplugin)
         {
-            CanvasButton cb = new CanvasButton(iplugin);
-            cb.AddEvent += cb_AddEvent;
+            CanvasButton cb = new CanvasButton();
+
+            cb.InitCanvasButton(iplugin);
+            //cb.AddEvent += cb_AddEvent;
             DragControls.Add(cb);
 
             this.bottomcanvas.Children.Add(cb.Element);

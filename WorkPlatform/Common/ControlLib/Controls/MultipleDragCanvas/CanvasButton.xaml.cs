@@ -13,6 +13,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Jisons;
 using PlatformCommon.Plugin;
+using PlatformCommon.Manager;
+using PlatformCommon.Events;
 
 namespace ControlLib
 {
@@ -44,29 +46,64 @@ namespace ControlLib
         //    control.SetSelectedView((bool)e.NewValue);
         //}
 
+        public Button showButton = null;
+
+        public Rectangle selectedview = null;
+
         public event EventHandler AddEvent;
         protected void AddingEvent()
         {
-            if (AddEvent != null)
-            {
-                AddEvent(this, EventArgs.Empty);
-            }
+            GlobalEvent.Instance.EventAggregator.GetEvent<PluginsEvent>().Publish(new PluginsEventArgs() { Action = PluginAction.Show, PluginObject = PluginObject });
+            PluginObject.IsShow = true;
         }
 
-        public CanvasButton(IPluginObject po)
+        public CanvasButton()
         {
             InitializeComponent();
+        }
+
+        public void InitCanvasButton(IPluginObject po)
+        {
             IsSelected = true;
             this.Loaded += CanvasButton_Loaded;
             PluginObject = po;
-            this.showbutton.Background = new ImageBrush(po.PluginIcon) { Stretch = Stretch.Uniform };
-            this.showbutton.Content = po.PluginName;
+
+            this.Tag = po.PluginName;
+
+            CompositionTarget.Rendering += CompositionTarget_Rendering;
+        }
+
+        void CompositionTarget_Rendering(object sender, EventArgs e)
+        {
+            if (showButton == null)
+            {
+                showButton = this.FindVisualChild<Button>();
+                if (showButton != null)
+                {
+                    this.showButton.Background = new ImageBrush(PluginObject.PluginIcon) { Stretch = Stretch.Uniform };
+                    this.showButton.Content = PluginObject.PluginName;
+                }
+                return;
+            }
+
+            if (selectedview == null)
+            {
+                selectedview = this.FindVisualChild<Rectangle>();
+            }
+
+            if (defaultView == null)
+            {
+                defaultView = this.showButton.GetImageSource();
+                if (defaultView != null)
+                {
+                    CompositionTarget.Rendering -= CompositionTarget_Rendering;
+                }
+            }
         }
 
         void CanvasButton_Loaded(object sender, RoutedEventArgs e)
         {
-            defaultView = this.showbutton.GetImageSource();
-            IsSelected = false;
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -79,9 +116,29 @@ namespace ControlLib
 
         }
 
+
+        protected override void OnPreviewMouseDoubleClick(MouseButtonEventArgs e)
+        {
+            AddingEvent();
+            base.OnPreviewMouseDoubleClick(e);
+        }
+
+        protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
+        {
+            base.OnPreviewMouseDown(e);
+        }
+
+        protected override void OnPreviewMouseLeftButtonUp(MouseButtonEventArgs e)
+        {
+            base.OnPreviewMouseLeftButtonUp(e);
+        }
+
         public void SetSelectedView(bool isselected)
         {
-            this.selectedview.Fill = isselected ? SelectBrush : UnSelectBrush;
+            if (this.selectedview != null)
+            {
+                this.selectedview.Fill = isselected ? SelectBrush : UnSelectBrush;
+            }
         }
 
         #region IActionControl 成员
@@ -118,7 +175,7 @@ namespace ControlLib
 
         private void btn_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            AddingEvent();
+
         }
     }
 }

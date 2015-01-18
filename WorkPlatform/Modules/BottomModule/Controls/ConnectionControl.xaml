@@ -10,7 +10,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
 
-                        <Grid  >
+                        <Grid>
 
                             <Grid x:Name="grid">
 
@@ -29,7 +29,7 @@
                                     <ImageBrush ImageSource="/Modules.BottomModule;component/Images/toolbar_hover.png" Stretch="Fill" />
                                 </Border.Background>
                             </Border>
-                          
+
                         </Grid>
                         <ControlTemplate.Triggers>
 

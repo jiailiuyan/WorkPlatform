@@ -218,7 +218,7 @@ namespace UdpSendFiles
         public int ReceiveBuffer(int index, byte[] buffer)
         {
             _lastReceiveTime = DateTime.Now;
-            if (ReceiveFilePartList[index])
+            if (ReceiveFilePartList.Count == 0 || ReceiveFilePartList[index])
             {
                 return 0;
             }

@@ -175,6 +175,20 @@ namespace Modules.MainModule
                         break;
                     }
 
+                case PluginAction.Show:
+                    {
+                        var p = this.PluginWindows.FirstOrDefault(i => i.Context.Equals(args.PluginObject));
+                        if (p == null)
+                        {
+                            PluginWindow pw = new PluginWindow(args.PluginObject);
+                            this.PluginWindows.Add(pw);
+                            this.pluginview.Children.Add(pw);
+                            pw.ShowPlugin();
+                        }
+
+                        break;
+                    }
+
                 default: break;
             }
         }

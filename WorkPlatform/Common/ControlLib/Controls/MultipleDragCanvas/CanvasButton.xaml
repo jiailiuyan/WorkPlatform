@@ -12,13 +12,11 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid Width="70" Height="70">
-        <Button x:Name="showbutton"
-                Click="Button_Click"
-                MouseDoubleClick="btn_MouseDoubleClick" />
+        <Button Click="Button_Click" MouseDoubleClick="btn_MouseDoubleClick" />
 
 
-        <Rectangle x:Name="selectedview"
-                   IsEnabled="False" Margin="0,0,0,10"
+        <Rectangle Margin="0,0,0,10"
+                   IsEnabled="False"
                    IsHitTestVisible="False" />
 
     </Grid>

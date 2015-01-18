@@ -8,52 +8,40 @@
              Height="397"
              mc:Ignorable="d">
     <controls:ExceptGrid Background="#FF3c3c3c">
-        <TextBox x:Name="receivemsg"
-                 Width="304"
-                 Height="164"
-                 Margin="32,24,0,0"
-                 HorizontalAlignment="Left"
-                 VerticalAlignment="Top"
-                 Text=" "
-                 TextWrapping="Wrap" />
-        <TextBox x:Name="msg"
-                 Width="304"
-                 Height="100"
-                 Margin="32,225,0,0"
-                 HorizontalAlignment="Left"
-                 VerticalAlignment="Top"
-                 Text=" "
-                 TextWrapping="Wrap" />
+
+        <controls:ChatViewBox x:Name="viewrichbox" Margin="10,0,392,204" />
+
+        <controls:ChatInputBox x:Name="inputrichbox" Margin="10,227,392,29" />
+
+
         <Button Width="75"
-                Margin="166,355,0,0"
+                Margin="166,373,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Click="close_Click"
                 Content="关闭" />
         <Button Width="75"
-                Margin="261,355,0,0"
+                Margin="261,373,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Click="send_Click"
                 Content="发送" />
         <Button Width="33"
-                Margin="127,198,0,0"
+                Margin="136,198,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Click="sendfile_Click"
-                Content=""
-                Style="{x:Null}">
+                Content="">
             <Button.Background>
                 <ImageBrush ImageSource="/Modules.ChatModule;component/Images/file.png" />
             </Button.Background>
         </Button>
         <Button Width="28"
-                Margin="166,198,0,0"
+                Margin="175,198,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Click="sendfloder_Click"
-                Content=""
-                Style="{x:Null}">
+                Content="">
             <Button.Background>
                 <ImageBrush ImageSource="/Modules.ChatModule;component/Images/folder.png" />
             </Button.Background>
@@ -67,6 +55,43 @@
                     VerticalAlignment="Top"
                     Orientation="Vertical"
                     RenderTransformOrigin="0.5,0.5" />
+        <Button Width="29"
+                Margin="66,198,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Click="Button_Click_2"
+                Content="U">
+            <Button.Background>
+                <ImageBrush ImageSource="/Modules.ChatModule;component/Images/Underline16.png" />
+            </Button.Background>
+        </Button>
+        <Button Width="29"
+                Margin="37,198,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Click="Button_Click"
+                Content="B">
+            <Button.Background>
+                <ImageBrush ImageSource="/Modules.ChatModule;component/Images/Bold16.png" />
+            </Button.Background>
+        </Button>
+        <Button Width="29"
+                Margin="93,198,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Click="Button_Click_1"
+                Content="I">
+            <Button.Background>
+                <ImageBrush ImageSource="/Modules.ChatModule;component/Images/Italic16.png" />
+            </Button.Background>
+        </Button>
+        <Menu Width="68"
+              Height="24"
+              Margin="225,198,0,0"
+              HorizontalAlignment="Left"
+              VerticalAlignment="Top">
+            <MenuItem x:Name="pluginmenu" Header="发送组件" />
+        </Menu>
 
 
     </controls:ExceptGrid>

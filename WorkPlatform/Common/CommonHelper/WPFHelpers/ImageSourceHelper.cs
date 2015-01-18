@@ -62,6 +62,12 @@ namespace Jisons
         {
             int Height = (int)frameworkElement.ActualHeight;
             int Width = (int)frameworkElement.ActualWidth;
+
+            if (Height == 0 || Width == 0)
+            {
+                return null;
+            }
+
             RenderTargetBitmap renderBMP = new RenderTargetBitmap(Width, Height, 96, 96, PixelFormats.Pbgra32);
             renderBMP.Render(frameworkElement);
             return renderBMP as ImageSource;
