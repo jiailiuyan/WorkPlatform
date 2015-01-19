@@ -11,14 +11,14 @@ namespace Sodao.FastSocket.Server
     public class SocketServerManager
     {
         #region Private Members
-        static private readonly List<SocketBase.IHost> _listHosts = new List<SocketBase.IHost>();
+        private static readonly List<SocketBase.IHost> _listHosts = new List<SocketBase.IHost>();
         #endregion
 
         #region Static Methods
         /// <summary>
         /// 初始化Socket Server
         /// </summary>
-        static public void Init()
+        public static void Init()
         {
             Init("socketServer");
         }
@@ -26,11 +26,65 @@ namespace Sodao.FastSocket.Server
         /// 初始化Socket Server
         /// </summary>
         /// <param name="sectionName"></param>
-        static public void Init(string sectionName)
+        public static void Init(string sectionName)
         {
             if (string.IsNullOrEmpty(sectionName)) throw new ArgumentNullException("sectionName");
             Init(ConfigurationManager.GetSection(sectionName) as Config.SocketServerConfig);
         }
+
+        public static void InitServer(string ip, int port)
+        {
+            Config.Server serverConfig = new Config.Server();
+
+            //         <server name="binary"
+            //          port="12000"
+            //          socketBufferSize="8192"
+            //          messageBufferSize="8192"
+            //          maxMessageSize="102400"
+            //          maxConnections="20000"
+            //          serviceType="ServerManage.WorkService, ServerManage"
+            //          protocol="asyncBinary"/>
+            //</servers>
+
+            IPAddress ipaddress = IPAddress.Parse(ip);
+
+            serverConfig.Name = "binary";
+            serverConfig.Port = port;
+            serverConfig.SocketBufferSize = 8192;
+            serverConfig.MaxMessageSize = 102400;
+            serverConfig.MessageBufferSize = 8192;
+            serverConfig.MaxConnections = 20000;
+            serverConfig.ServiceType = "ServerManage.WorkService, ServerManage";
+            serverConfig.Protocol = "asyncBinary";
+
+            var objProtocol = GetProtocol(serverConfig.Protocol);
+            if (objProtocol == null) throw new InvalidOperationException("protocol");
+
+            //init custom service
+            var tService = Type.GetType(serverConfig.ServiceType, false);
+            if (tService == null) throw new InvalidOperationException("serviceType");
+
+            var serviceFace = tService.GetInterface(typeof(ISocketService<>).Name);
+            if (serviceFace == null) throw new InvalidOperationException("serviceType");
+
+            var objService = Activator.CreateInstance(tService);
+            if (objService == null) throw new InvalidOperationException("serviceType");
+
+            //init host.
+            var host = Activator.CreateInstance(typeof(SocketServer<>).MakeGenericType(
+                serviceFace.GetGenericArguments()),
+                objService,
+                objProtocol,
+                serverConfig.SocketBufferSize,
+                serverConfig.MessageBufferSize,
+                serverConfig.MaxMessageSize,
+                serverConfig.MaxConnections) as BaseSocketServer;
+
+            host.AddListener(serverConfig.Name, new IPEndPoint(ipaddress, serverConfig.Port));
+
+            _listHosts.Add(host);
+        }
+
         /// <summary>
         /// 初始化Socket Server
         /// </summary>

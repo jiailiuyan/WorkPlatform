@@ -52,9 +52,9 @@ namespace ServerManage
             }
         }
 
-        public static void Start()
+        public static void Start(string ip, int port)
         {
-            SocketServerManager.Init();
+            SocketServerManager.InitServer(ip, port);
             SocketServerManager.Start();
         }
 

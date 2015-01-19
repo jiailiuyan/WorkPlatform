@@ -46,15 +46,29 @@ namespace Modules.LoginModule
 
         void LoginControl_Loaded(object sender, RoutedEventArgs e)
         {
-            serverip.Text = ServerData.Instance.IP;
-            port.Text = ServerData.Instance.Port.ToString();
-            WorkClient.Instance.RegisterServerNode(ServerData.Instance.IP, ServerData.Instance.Port);
+
+            var ip = ServerData.Instance.IP;
+            if (!string.IsNullOrWhiteSpace(ip))
+            {
+                serverip.Text = ServerData.Instance.IP;
+                port.Text = ServerData.Instance.Port.ToString();
+                WorkClient.Instance.RegisterServerNode(ServerData.Instance.IP, ServerData.Instance.Port);
+            }
+            else
+            {
+                var ips = NetHelper.GetNetInfo().FirstOrDefault().IP;
+                if (ips != null)
+                {
+                    serverip.Text = ips.FirstOrDefault();
+                }
+            }
 
             this.name.Text = "lisi";
             this.password.Text = "123456";
 
             JudgeName();
             JudgePassword();
+
         }
 
         void Instance_OnMessageReceive(object sender, PlatformCommon.Message.MessageDataArgs e)

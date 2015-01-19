@@ -5,7 +5,9 @@
         Width="525"
         Height="350">
     <Grid>
-        <DataGrid x:Name="dataGrid" AutoGenerateColumns="False">
+        <DataGrid x:Name="dataGrid"
+                  Margin="0,47,0,0"
+                  AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="80"
                                     Binding="{Binding KeyId}"
@@ -19,14 +21,39 @@
                 <DataGridTextColumn Width="80"
                                     Binding="{Binding Person.PersonName}"
                                     Header="Name" />
-                <DataGridTextColumn Width="50"
+                <DataGridTextColumn Width="140"
                                     Binding="{Binding ClientInfo.IP}"
                                     Header="IP" />
-                <DataGridTextColumn Width="80"
+                <DataGridTextColumn Width="50"
                                     Binding="{Binding ClientInfo.Port}"
                                     Header="Port" />
 
             </DataGrid.Columns>
         </DataGrid>
+        <Label Margin="10,10,0,0"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Content="服务器IP" />
+        <Label Margin="251,10,0,0"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Content="服务器Port" />
+
+        <TextBox x:Name="serverport"
+                 Margin="326,14,0,0"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Top"
+                 Text="12000" />
+        <Button Width="75" x:Name="startbtn"
+                Margin="394,12,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Click="Button_Click"
+                Content="开启" />
+        <ComboBox x:Name="serverip"
+                  Width="164"
+                  Margin="72,10,0,0"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Top" />
     </Grid>
 </Window>

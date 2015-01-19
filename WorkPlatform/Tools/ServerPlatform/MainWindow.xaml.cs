@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using Project.BusinessFacade;
 using ServerManage;
 using PlatformCommon.Message;
+using Jisons;
 
 namespace PrismServer
 {
@@ -34,16 +35,33 @@ namespace PrismServer
         public MainWindow()
         {
             InitializeComponent();
+            this.Loaded += MainWindow_Loaded;
+        }
 
-            WorkService.Start();
+        void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<string> ip = new List<string>();
+            var net = NetHelper.GetNetInfo();
 
-            InitPersons();
+            net.ForEach(i => { ip.Add(i.Name + " " + i.IP[0]); });
+            this.serverip.ItemsSource = ip;
+            this.serverip.SelectedIndex = 0;
         }
 
         public void InitPersons()
         {
             Persons = WorkService.Instance.Connections;
             this.dataGrid.ItemsSource = Persons;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var ip = this.serverip.SelectedValue.ToString().Split(' ')[1];
+            WorkService.Start(ip, int.Parse(this.serverport.Text));
+            InitPersons();
+
+            var btn = sender as Button;
+            btn.IsEnabled = false;
         }
     }
 }
