@@ -6,6 +6,7 @@ using System.Text;
 using Jisons;
 using UdpSendFiles;
 using PlatformCommon.Message;
+using CommonHelper;
 
 namespace ClientManager.Controls
 {
@@ -89,7 +90,7 @@ namespace ClientManager.Controls
             TotalTransfersSize += e.Size;
             base.ShowSpeed((double)TotalTransfersSize, (double)TotleFileLength);
         }
-      
+
         void UdpReceiveFiles_RequestSendFile(object sender, RequestSendFileEventArgs e)
         {
             var sendFileEventArgs = new RequestSendFileEventArgs(e.TraFransfersFileStart, e.RemoteIP);
@@ -110,7 +111,7 @@ namespace ClientManager.Controls
                 var sendFileEventArgs = new RequestSendFileEventArgs(e.TraFransfersFileStart, e.RemoteIP);
                 base.UDPReceive.AcceptReceive(sendFileEventArgs);
             }
-            else if (e.TraFransfersFileStart.FileName.Contains(MessageSign.StartSign))
+            else if (e.TraFransfersFileStart.FileName.Contains(MessageSign.SendingSign))
             {
                 base.SendFileEventArgs = new RequestSendFileEventArgs(e.TraFransfersFileStart, e.RemoteIP);
             }
@@ -139,6 +140,7 @@ namespace ClientManager.Controls
 
         protected override void UDPReceive_FileReceiveBuffer(object sender, FileReceiveBufferEventArgs e)
         {
+            //文件夹的接受不在此处理进度
             //base.UDPReceive_FileReceiveBuffer(sender, e);
         }
 
@@ -159,6 +161,23 @@ namespace ClientManager.Controls
             }
 
             this.FloderPath = dir.FullName;
+        }
+
+        protected override void SaveAs()
+        {
+            var fileinfo = new FileInfo(SendFileEventArgs.TraFransfersFileStart.FileName);
+            TotalTransfersSize = 0;
+            var savefile = DialogHelper.SaveFloder();
+            if (!string.IsNullOrWhiteSpace(savefile))
+            {
+                fileinfo = new FileInfo(savefile);
+                SendFileEventArgs.Path = fileinfo.DirectoryName;
+                SendFileEventArgs.TraFransfersFileStart.FileName = fileinfo.Name;
+                UDPReceive.AcceptReceive(SendFileEventArgs);
+                StartTime = HighPrecisionTimerHelper.PrecisionTimerOfMillisecond;
+            }
+
+            this.FloderPath = savefile;
         }
 
         public override void Close()

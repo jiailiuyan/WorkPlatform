@@ -58,6 +58,16 @@ namespace CommonHelper
             return filPath;
         }
 
+        public static string SaveFloder()
+        {
+            string filPath = string.Empty;
+            FolderBrowserDialog dialog = new FolderBrowserDialog();
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                filPath = dialog.SelectedPath;
+            }
+            return filPath;
+        }
 
     }
 }

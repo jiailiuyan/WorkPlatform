@@ -33,7 +33,7 @@ namespace PlatformCommon.Plugin
             AppDomain.CurrentDomain.SetShadowCopyFiles();
         }
 
-        private ObservableCollection<IPluginObject> pluginObjects;
+        private ObservableCollection<IPluginObject> pluginObjects = new ObservableCollection<IPluginObject>();
         public ObservableCollection<IPluginObject> PluginObjects
         {
             get
@@ -57,7 +57,8 @@ namespace PlatformCommon.Plugin
             if (plugindirecroty.Exists)
             {
                 var files = plugindirecroty.GetFiles().ToList();
-                PluginObjects = new ObservableCollection<IPluginObject>(LoadAssembly(files));
+                var plugins = LoadAssembly(files);
+                plugins.ForEach(i => PluginObjects.Add(i));
             }
         }
 

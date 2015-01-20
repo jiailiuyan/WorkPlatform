@@ -1044,7 +1044,7 @@
                 Click="login_Click"
                 Content="登录"
                 Style="{DynamicResource ButtonStyle5}" />
-        <Label Grid.Column="1"
+        <Label Grid.Column="1" Visibility="Hidden"
                Width="205"
                Height="65"
                Margin="121,69,0,0"
@@ -1056,7 +1056,7 @@
                Foreground="#FF988171"
                Style="{DynamicResource LabelStyle1}" />
         <Rectangle Grid.Column="1"
-                   Width="2"
+                   Width="2" Visibility="Hidden"
                    Height="200"
                    Margin="20,10,0,0"
                    HorizontalAlignment="Left"
@@ -1080,7 +1080,7 @@
             </Rectangle.Fill>
         </Rectangle>
         <Rectangle Grid.Column="2"
-                   Width="2"
+                   Width="2"  Visibility="Hidden"
                    Height="200"
                    Margin="29.168,10,0,0"
                    HorizontalAlignment="Left"
@@ -1118,7 +1118,7 @@
                 </TransformGroup>
             </TextBlock.RenderTransform>
         </TextBlock>
-        <Label Grid.Column="1"
+        <Label Grid.Column="1"  Visibility="Hidden"
                Margin="49,347,0,0"
                HorizontalAlignment="Left"
                VerticalAlignment="Top"
@@ -1133,7 +1133,7 @@
                  Style="{x:Null}"
                  Text="127.0.0.1"
                  TextWrapping="Wrap" />
-        <Label Grid.Column="1"
+        <Label Grid.Column="1"  Visibility="Hidden"
                Margin="229,350,0,0"
                HorizontalAlignment="Left"
                VerticalAlignment="Top"
