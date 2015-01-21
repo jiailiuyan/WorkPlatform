@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Windows;
 
-namespace Ezhu.AutoUpdater.UI
+namespace WorkPlatform.AutoUpdater.UI
 {
     public partial class DownFileProcess : WindowBase
     {
@@ -63,7 +63,9 @@ namespace Ezhu.AutoUpdater.UI
 
         public void DownloadUpdateFile()
         {
-            string url = Constants.RemoteUrl + callExeName + "/update.zip";
+            //string url = Constants.RemoteUrl + callExeName + "/update.zip";
+
+            string url = @"D:\Debug.zip";
             var client = new System.Net.WebClient();
             client.DownloadProgressChanged += (sender, e) =>
             {
@@ -71,7 +73,12 @@ namespace Ezhu.AutoUpdater.UI
             };
             client.DownloadDataCompleted += (sender, e) =>
             {
-                string zipFilePath = System.IO.Path.Combine(updateFileDir, "update.zip");
+                //string zipFilePath = System.IO.Path.Combine(updateFileDir, "update.zip");
+
+                string zipFilePath = System.IO.Path.Combine(updateFileDir, this.appName + ".zip");
+
+                new FileInfo(zipFilePath).Directory.Create();
+                
                 byte[] data = e.Result;
                 BinaryWriter writer = new BinaryWriter(new FileStream(zipFilePath, FileMode.OpenOrCreate));
                 writer.Write(data);
@@ -82,7 +89,7 @@ namespace Ezhu.AutoUpdater.UI
                 {
                     Action f = () =>
                     {
-                       txtProcess.Text = "开始更新程序...";
+                        txtProcess.Text = "开始更新程序...";
                     };
                     this.Dispatcher.Invoke(f);
 
@@ -95,9 +102,9 @@ namespace Ezhu.AutoUpdater.UI
 
                     //移动文件
                     //App
-                    if(Directory.Exists(System.IO.Path.Combine(tempDir,"App")))
+                    if (Directory.Exists(System.IO.Path.Combine(tempDir, "")))
                     {
-                        CopyDirectory(System.IO.Path.Combine(tempDir,"App"),appDir);
+                        CopyDirectory(System.IO.Path.Combine(tempDir, ""), appDir);
                     }
 
                     f = () =>
@@ -135,7 +142,7 @@ namespace Ezhu.AutoUpdater.UI
                                 alert.YesButton.Width = 40;
                                 alert.NoButton.Width = 40;
                             };
-                            alert.Width=300;
+                            alert.Width = 300;
                             alert.Height = 200;
                             alert.ShowDialog();
                             if (alert.YesBtnSelected)
@@ -149,7 +156,7 @@ namespace Ezhu.AutoUpdater.UI
                             }
                             else
                             {
- 
+
                             }
                             this.Close();
                         };
@@ -206,6 +213,6 @@ namespace Ezhu.AutoUpdater.UI
             {
                 throw new Exception("复制文件错误");
             }
-        } 
+        }
     }
 }

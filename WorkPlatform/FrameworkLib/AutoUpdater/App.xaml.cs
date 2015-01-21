@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System;
 
-namespace Ezhu.AutoUpdater
+namespace WorkPlatform.AutoUpdater
 {
     /// <summary>
     /// App.xaml 的交互逻辑

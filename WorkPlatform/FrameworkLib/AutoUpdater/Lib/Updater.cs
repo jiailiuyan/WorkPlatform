@@ -1,11 +1,8 @@
 ﻿using System;
 using System.IO;
-using System.Windows;
-
-
 using System.Xml.Linq;
 
-namespace Ezhu.AutoUpdater
+namespace WorkPlatform.AutoUpdater
 {
     public class Updater
     {
@@ -24,9 +21,34 @@ namespace Ezhu.AutoUpdater
 
         public static void CheckUpdateStatus()
         {
+
+
+            //try
+            //{
+            //    string url = @"D:/update.xml";// 
+            //    FileStream stream = new FileStream(url, FileMode.Open);
+
+            //    XDocument xDoc = XDocument.Load(stream);
+            //    UpdateInfo updateInfo = new UpdateInfo();
+            //    XElement root = xDoc.Element("UpdateInfo");
+            //    updateInfo.AppName = root.Element("AppName").Value;
+            //    updateInfo.AppVersion = root.Element("AppVersion") == null || string.IsNullOrEmpty(root.Element("AppVersion").Value) ? null : new Version(root.Element("AppVersion").Value);
+            //    updateInfo.RequiredMinVersion = root.Element("RequiredMinVersion") == null || string.IsNullOrEmpty(root.Element("RequiredMinVersion").Value) ? null : new Version(root.Element("RequiredMinVersion").Value);
+            //    updateInfo.Desc = root.Element("Desc").Value;
+            //    updateInfo.MD5 = Guid.NewGuid();
+
+            //    stream.Close();
+            //    Updater.Instance.StartUpdate(updateInfo);
+            //}
+            //catch
+            //{ }
+
+            //return; 
+
             System.Threading.ThreadPool.QueueUserWorkItem((s) =>
             {
-                string url = Constants.RemoteUrl + Updater.Instance.CallExeName + "/update.xml";
+                //string url = Constants.RemoteUrl + Updater.Instance.CallExeName + "/update.xml";
+                string url = @"D:/update.xml";//
                 var client = new System.Net.WebClient();
                 client.DownloadDataCompleted += (x, y) =>
                 {
@@ -113,7 +135,11 @@ namespace Ezhu.AutoUpdater
         /// </summary>
         public virtual Version CurrentVersion
         {
-            get { return new Version(System.Diagnostics.FileVersionInfo.GetVersionInfo(System.Reflection.Assembly.GetEntryAssembly().Location).ProductVersion); }
+            get
+            {
+                var a = new Version(System.Diagnostics.FileVersionInfo.GetVersionInfo(System.Reflection.Assembly.GetEntryAssembly().Location).ProductVersion);
+                return new Version(System.Diagnostics.FileVersionInfo.GetVersionInfo(System.Reflection.Assembly.GetEntryAssembly().Location).ProductVersion);
+            }
         }
 
         /// <summary>

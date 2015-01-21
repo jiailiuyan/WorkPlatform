@@ -16,8 +16,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Diagnostics;
+using System.IO;
+using System.Xml.Linq;
 
-namespace Ezhu.AutoUpdater
+namespace WorkPlatform.AutoUpdater
 {
     class Program
     {
@@ -27,10 +29,13 @@ namespace Ezhu.AutoUpdater
         [STAThread]
         static void Main(string[] args)
         {
+
+            //WorkPlatform.AutoUpdater.Updater.CheckUpdateStatus();
+
             if (args.Length == 0)
             {
                 //Ezhu.AutoUpdater.App app = new Ezhu.AutoUpdater.App();
-                //UI.DownFileProcess downUI = new UI.DownFileProcess("", "", "","","","");
+                //UI.DownFileProcess downUI = new UI.DownFileProcess("", "", "", "", "", "");
                 //app.Run(downUI);
 
 
@@ -39,6 +44,26 @@ namespace Ezhu.AutoUpdater
 
                 //Ezhu.AutoUpdater.App app = new Ezhu.AutoUpdater.App();
                 //app.Run(downUI);
+
+
+
+
+                //string url = @"D:/update.xml";// 
+                //FileStream stream = new FileStream(url, FileMode.Open);
+
+                //XDocument xDoc = XDocument.Load(stream);
+                //UpdateInfo updateInfo = new UpdateInfo();
+                //XElement root = xDoc.Element("UpdateInfo");
+                //updateInfo.AppName = root.Element("AppName").Value;
+                //updateInfo.AppVersion = root.Element("AppVersion") == null || string.IsNullOrEmpty(root.Element("AppVersion").Value) ? null : new Version(root.Element("AppVersion").Value);
+                //updateInfo.RequiredMinVersion = root.Element("RequiredMinVersion") == null || string.IsNullOrEmpty(root.Element("RequiredMinVersion").Value) ? null : new Version(root.Element("RequiredMinVersion").Value);
+                //updateInfo.Desc = root.Element("Desc").Value;
+                //updateInfo.MD5 = Guid.NewGuid();
+
+                //Ezhu.AutoUpdater.App app = new Ezhu.AutoUpdater.App();
+                //UI.DownFileProcess downUI = new UI.DownFileProcess("", "", "", "", "", "");
+                //app.Run(downUI);
+
                 return;
             }
             else if (args[0] == "update")
@@ -54,7 +79,7 @@ namespace Ezhu.AutoUpdater
                     string desc = args[6];
 
                     //Check If Have New Vision
-                    Ezhu.AutoUpdater.App app = new Ezhu.AutoUpdater.App();
+                    WorkPlatform.AutoUpdater.App app = new WorkPlatform.AutoUpdater.App();
                     UI.DownFileProcess downUI = new UI.DownFileProcess(callExeName, updateFileDir, appDir, appName, appVersion, desc) { WindowStartupLocation = WindowStartupLocation.CenterScreen };
                     app.Run(downUI);
                 }

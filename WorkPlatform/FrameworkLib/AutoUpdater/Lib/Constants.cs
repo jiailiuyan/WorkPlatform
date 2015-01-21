@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Ezhu.AutoUpdater
+namespace WorkPlatform.AutoUpdater
 {
     public class Constants
     {
-        public static readonly string RemoteUrl = "http://localhost/";
+        public static readonly string RemoteUrl = "http://www.jiailiuyan.com/";
     }
 }

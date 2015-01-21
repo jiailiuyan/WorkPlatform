@@ -11,7 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Ezhu.AutoUpdater
+namespace WorkPlatform.AutoUpdater
 {
     /// <summary>
     /// WindowBase.xaml 的交互逻辑
